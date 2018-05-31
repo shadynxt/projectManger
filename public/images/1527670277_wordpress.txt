@@ -1,0 +1,7 @@
+BgU1&4!t5lLlQcO%)D
+-m -nc
+I smile …Because I don’t know WHAT THE HELL is going on.
+The world is coming to an end... SAVE YOUR BUFFERS !
+If you don't want to be replaced by a computer, don't act like one
+Better to be a geek than an idiot
+wget -X /dev/vendor,/dev/storage,/node/node_modules -rkpN --reject="index.html*" http://demoyourprojects.com/careery
