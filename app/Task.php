@@ -26,4 +26,26 @@ class Task extends Model
          return $this->hasMany('App\TaskFiles') ;
      }
 
+    public static $rules = [
+            'project_id' => 'required',
+            'task_title' => 'required',
+            'task_desc' => 'required',
+            'task' => 'required',
+            'priority' => 'required',
+            'completed' => 'required',
+            'duedate' => 'required',
+    ];
+    
+     public static $messages =[
+        'project_id.required'            =>  'هذا الحقل مطلوب',
+      'task_title.required'            =>  'هذا الحقل مطلوب',
+     
+      'task_desc.required'             =>  'هذا الحقل مطلوب',
+      'task.required'             =>  'هذا الحقل مطلوب',
+      'priority.required'             =>  'هذا الحقل مطلوب',
+      'completed.required'             =>  'هذا الحقل مطلوب',
+      'duedate.required'             =>  'هذا الحقل مطلوب',
+    ];
+      
+      
 }

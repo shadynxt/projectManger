@@ -43,7 +43,7 @@ class ProjectController extends Controller
     {
         $projects_count = Project::count() ;
       
-        if ( $projects_count < 10  ) {  
+        if ( $projects_count < 1000  ) {  
             
             // dd( $request->all()  ) ;
             $this->validate( $request, [
@@ -58,7 +58,7 @@ class ProjectController extends Controller
         }
         
         else {
-            Session::flash('info', 'Please delete some projects, Demo max: 10') ;
+            Session::flash('info', 'Please delete some projects, Demo max: 1000') ;
             return redirect()->route('project.show') ;          
         }
     }

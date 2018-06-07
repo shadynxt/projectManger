@@ -147,7 +147,7 @@ class TaskController extends Controller
         // dd($request->all() ) ;
         $tasks_count = Task::count() ;
         
-        if ( $tasks_count < 20  ) { 
+        if ( $tasks_count < 200  ) { 
             // dd( $request->all()  ) ;
             // dd($request->file('photos'));
 
@@ -191,7 +191,7 @@ class TaskController extends Controller
         }
         
         else {
-            Session::flash('info', 'Please delete some tasks, Demo max tasks: 20') ;
+            Session::flash('info', 'Please delete some tasks, Demo max tasks: 200') ;
             return redirect()->route('task.show') ;         
         }
 
@@ -300,9 +300,11 @@ class TaskController extends Controller
 ===============================================*/
     public function searchTask()
     {
+        $completed = Task::where('completed' ,'=',1)->get();
+       
         $value = Input::get('task_search');
         // Search Inside the Contents of a task
-        $tasks = Task::where('task_title', 'LIKE', '%' . $value . '%')->limit(25)->get();
+        $tasks = Task::where('task_title', 'LIKE', '%' . $value . '%')->orWhere('completed', 'LIKE', '%' . $value . '%')->limit(25)->get();
         return view('task.search')->with('value', $value)
                                   ->with('tasks', $tasks) ;
     }

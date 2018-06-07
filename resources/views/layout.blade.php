@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Project Task Manager - JC Web Development</title>
+        <title>Project Task Manger - AlQemam Web Development</title>
       <!-- Latest compiled and minified CSS -->
       <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         <!-- Fonts -->
