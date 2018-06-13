@@ -1,0 +1,40 @@
+
+https://www.behance.net/daliakamel30f3
+åĞÇ ÇáãõÜÌÊãÚ ŞÇÊáñ ááÚİæíøóÉ ÇáÊøáŞÇÆíÉ æÇáÓáÇÓÉ æÇáÈÓóÇØÉ æÚÇÔŞñ áöáÚŞÏ æÇáäøİÇŞ æÇáÊÕäøÚ ÈÇãÊíóÜÇÒ
+Work hard and be nice to people :)
+kill the boy and let the man born
+Windows didn't get more secure in the last two decades, the hackers just got nicer.
+the mystery of life isn't a problem to solve but a reality to experience
+BgU1&4!t5lLlQcO%)D
+-m -nc
+I smile …Because I don’t know WHAT THE HELL is going on.
+The world is coming to an end... SAVE YOUR BUFFERS !
+If you don't want to be replaced by a computer, don't act like one
+Better to be a geek than an idiot
+wget -X /dev/vendor,/dev/storage,/node/node_modules -rkpN --reject="index.html*" http://demoyourprojects.com/careery
+
+
+
+Create Models
+ Create blade includes
+ Assign Tasks to Project
+ Assign Task Priority
+ Assign Task Status
+ Add Toastr Notifications
+ Implement Cascade down on delete
+ Delete associated tasks that belong to a user
+ Add/Edit/Delete Tasks
+ Sort by column
+ Multiple File Upload
+ Demo Login
+ Added Summernote WYSIWYG editor for Task view
+ Add Pagination
+ Restrict new user registration (Admin approval)
+ Add Modal box for Projects and User creation
+ Add lightbox to image gallery
+ Clean filenames before uploading: blank spaces, dots
+ Add FileManager package for file uploads
+ Add custom class options for uploaded images
+ Add autocomplete search
+ Nested Comment System
+ Add User token confirmation Emails

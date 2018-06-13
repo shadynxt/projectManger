@@ -29,12 +29,25 @@ Route::get('/auth/refresh', ['as' => 'auth.refresh', 'uses' => 'API\AuthApiContr
 Route::post('/register', ['as' => 'auth.register', 'uses' => 'API\UserApiController@register']);
 Route::post('/login', ['as' => 'auth.login', 'uses' => 'API\UserApiController@login']);
 
+Route::group(['prefix'=>'projects'],function(){ /* messages Routes */
+	Route::get('index', 'API\ProjectApiController@index');
+	Route::group(['middleware' => ['jwt.auth']], function () {
+		
+		Route::get('getMyProjects', 'API\ProjectApiController@getMyProjects');
+		Route::post('create','API\ProjectApiController@create');
+		Route::post('search_projects','API\ProjectApiController@search_projects');
+		//Route::post('edit','API\TodoApiController@edit'); /* Message crud */
+		Route::post('update/{id}', 'API\ProjectApiController@update');
+		Route::post('delete/{id}', 'API\ProjectApiController@delete');
+	});
+});
 
 Route::group(['prefix'=>'tasks'],function(){ /* messages Routes */
 	Route::get('index', 'API\TaskApiController@index');
 	Route::group(['middleware' => ['jwt.auth']], function () {
-		
+		Route::get('getMyTasks', 'API\TaskApiController@getMyTasks');
 		Route::post('create','API\TaskApiController@create');
+		Route::post('search_tasks','API\TaskApiController@search_tasks');
 		//Route::post('edit','API\TodoApiController@edit'); /* Message crud */
 		Route::post('update/{id}', 'API\TaskApiController@update');
 		Route::post('delete/{id}', 'API\TaskApiController@delete');
