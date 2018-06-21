@@ -47,7 +47,12 @@ class TaskApiController extends AppBaseController
                 $task->task_title = $request->task_title;
                 $task->task   = $request->task_desc;
                 $task->priority   = $request->priority;
+                $task->start_date  = $request->start_date;
+                $task->actual_start_date  = $request->actual_start_date;
+                $task->end_date  = $request->end_date;
+                $task->actual_end_date  = $request->actual_end_date;
                 $task->duedate  = $request->duedate;
+
             
       if( $request->photos ) {
                  foreach ($request->photos as $img){

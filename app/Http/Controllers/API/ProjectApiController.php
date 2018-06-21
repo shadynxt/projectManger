@@ -23,6 +23,20 @@ class ProjectApiController extends AppBaseController
         return $this->sendResponse($project->toArray());
     }
 
+    public function update(Request $request,$id)
+    {
+        $project = Project::find($id);
+        
+        $user = auth()->user();
+		
+        if (!$user) {
+            return $this->sendError('Please login !', 401);
+        }
+        $inputs = $request->all();
+        $project->update($inputs);
+        return $this->sendResponse($project->toArray(), 'Project updated successfully');
+    }
+
     public function getMyProjects(){
 
         $user = auth()->user();

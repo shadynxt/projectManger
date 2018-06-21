@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     protected $fillable = [ 
-    	'project_id','user_id', 'task_title', 'task' , 'priority', 'duedate','photos'
+    	'project_id','user_id', 'task_title', 'task' , 'priority', 'duedate','photos','start_date','actual_start_date','end_date','actual_end_date'
      ] ;
 
      
@@ -33,7 +33,12 @@ class Task extends Model
             'task' => 'required',
             'priority' => 'required',
             'completed' => 'required',
+            'start_date' => 'required',
+            'actual_start_date' => 'required',
+            'end_date' => 'required',
+            'actual_end_date' => 'required',
             'duedate' => 'required',
+
     ];
     
      public static $messages =[
@@ -44,6 +49,10 @@ class Task extends Model
       'task.required'             =>  'هذا الحقل مطلوب',
       'priority.required'             =>  'هذا الحقل مطلوب',
       'completed.required'             =>  'هذا الحقل مطلوب',
+      'start_date.required'             =>  'هذا الحقل مطلوب',
+      'actual_start_date.required'             =>  'هذا الحقل مطلوب',
+      'end_date.required'             =>  'هذا الحقل مطلوب',
+      'actual_end_date.required'             =>  'هذا الحقل مطلوب',
       'duedate.required'             =>  'هذا الحقل مطلوب',
     ];
       

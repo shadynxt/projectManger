@@ -108,6 +108,34 @@ task_view->id: {{ $task_view->id }}<br>
     </div>
 
     <div class="panel panel-jc">
+        <div class="panel-heading">Start Date</div>
+        <div class="panel-body">
+            {{ $formatted_new_from }} 
+        </div>
+    </div>
+
+    <div class="panel panel-jc">
+        <div class="panel-heading">Actual Start Date</div>
+        <div class="panel-body">
+            {{ $formatted_new_ac_from }} 
+        </div>
+    </div>
+
+    <div class="panel panel-jc">
+        <div class="panel-heading">End Date</div>
+        <div class="panel-body">
+            {{ $formatted_new_to }} 
+        </div>
+    </div>
+
+    <div class="panel panel-jc">
+        <div class="panel-heading">Actual End Date</div>
+        <div class="panel-body">
+            {{ $formatted_new_ac_to  }} 
+        </div>
+    </div>
+
+    <div class="panel panel-jc">
         <div class="panel-heading">Due Date</div>
         <div class="panel-body">
             {{ $formatted_to }} 

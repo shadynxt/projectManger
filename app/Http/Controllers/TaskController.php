@@ -76,14 +76,21 @@ class TaskController extends Controller
 
         // Get task created and due dates
         $from = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $task_view->created_at);
-        $to   = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $task_view->duedate ); // add here the due date from create task
+        $to   = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $task_view->duedate);
 
+         $new_from   = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $task_view->start_date);
+         $new_ac_from   = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $task_view->actual_start_date);
+         $new_to   = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $task_view->end_date);
+         $new_ac_to   = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $task_view->actual_end_date);
         $current_date = \Carbon\Carbon::now();
  
         // Format dates for Humans
         $formatted_from = $from->toRfc850String();  
         $formatted_to   = $to->toRfc850String();
-
+        $formatted_new_from = $new_from->toRfc850String();
+        $formatted_new_ac_from = $new_ac_from->toRfc850String();
+        $formatted_new_to = $new_to->toRfc850String();
+        $formatted_new_ac_to = $new_ac_to->toRfc850String();
         // Get Difference between current_date and duedate = days left to complete task
         // $diff_in_days = $from->diffInDays($to);
         $diff_in_days = $current_date->diffInDays($to);
@@ -102,6 +109,10 @@ class TaskController extends Controller
             ->with('is_overdue', $is_overdue) 
             ->with('formatted_from', $formatted_from ) 
             ->with('formatted_to', $formatted_to )
+            ->with('formatted_new_from', $formatted_new_from )
+            ->with('formatted_new_ac_from', $formatted_new_ac_from )
+            ->with('formatted_new_to', $formatted_new_to )
+            ->with('formatted_new_ac_to', $formatted_new_ac_to )
             ->with('images_set', $images_set)
             ->with('files_set', $files_set) ;
     }
@@ -156,6 +167,10 @@ class TaskController extends Controller
                 'task'       => 'required',
                 'project_id' => 'required|numeric',
                 'photos.*'   => 'sometimes|required|mimes:png,gif,jpeg,jpg,txt,pdf,doc',  // photos is an array: photos.*
+                'start_date'    => 'required',
+                'actual_start_date'    => 'required',
+                'end_date'    => 'required',
+                'actual_end_date'    => 'required',
                 'duedate'    => 'required'
             ]) ;
 
@@ -167,6 +182,10 @@ class TaskController extends Controller
                 'task_title' => $request->task_title,
                 'task'       => $request->task,
                 'priority'   => $request->priority,
+                'start_date' => $request->start_date,
+                'actual_start_date' => $request->actual_start_date,
+                'end_date' => $request->end_date,
+                'actual_end_date' => $request->actual_end_date,
                 'duedate'    => $request->duedate
             ]);
 
@@ -247,6 +266,10 @@ class TaskController extends Controller
         $update_task->project_id = $request->project_id;
         $update_task->priority   = $request->priority;
         $update_task->completed  = $request->completed;
+        $update_task->start_date = $request->start_date;
+        $update_task->actual_start_date = $request->actual_start_date;
+        $update_task->end_date = $request->end_date;
+        $update_task->actual_end_date = $request->actual_end_date;
         $update_task->duedate    = $request->duedate;
 
         if( $request->hasFile('photos') ) {
