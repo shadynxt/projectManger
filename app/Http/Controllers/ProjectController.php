@@ -52,6 +52,8 @@ class ProjectController extends Controller
     
             $project_new = new Project;
             $project_new->project_name = $request->project;
+            $project_new->start_date = $request->start_date;
+            $project_new->end_date = $request->end_date;
             $project_new->save() ;
             Session::flash('success', 'Project Created') ;
             return redirect()->route('project.show') ;
@@ -97,6 +99,8 @@ class ProjectController extends Controller
     {
         $update_project = Project::find($id) ;
         $update_project->project_name = $request->name;
+        $update_project->start_date = $request->start_date;
+        $update_project->end_date = $request->end_date;
         $update_project->save() ;
         Session::flash('success', 'Project was sucessfully edited') ;
         return redirect()->route('project.show') ;
@@ -115,6 +119,17 @@ class ProjectController extends Controller
         Session::flash('success', 'Project was deleted and tasks associated with it') ;
         return redirect()->back();        
         
+    }
+
+    public function searchProject()
+    {
+        
+       
+        $value = Input::get('project_search');
+        // Search Inside the Contents of a task
+        $projects = Project::where('task_title', 'LIKE', '%' . $value . '%')->limit(25)->get();
+        return view('project.search')->with('value', $value)
+                                  ->with('projects', $projects) ;
     }
 
 }

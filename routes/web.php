@@ -12,6 +12,10 @@ Route::get('/main-search-autocomplete', function(){
     return json_encode(DB::table('tasks')->get()->all() );
 });
 
+Route::get('/main-search-autocomplete', function(){
+    return json_encode(DB::table('projects')->get()->all() );
+});
+
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 
@@ -30,6 +34,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 	// Store the new project from the form posted with the view Above
 	Route::post('/projects/store', 'ProjectController@store')->name('project.store');
 
+	Route::get('projects/search', 'ProjectController@searchProjects')->name('project.search') ;
 
 
 	// ====================  TASKS =======================

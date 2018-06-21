@@ -55,6 +55,7 @@ return array(
     'Carbon\\Exceptions\\InvalidDateException' => $vendorDir . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
     'Carbon\\Translator' => $vendorDir . '/nesbot/carbon/src/Carbon/Translator.php',
     'CreateCommentsTable' => $baseDir . '/database/migrations/2018_05_06_140740_create_comments_table.php',
+    'CreateNotificationsTable' => $baseDir . '/database/migrations/2018_06_21_071329_create_notifications_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateProjectsTable' => $baseDir . '/database/migrations/2017_08_19_154835_create_projects_table.php',
     'CreateTaskFilesTable' => $baseDir . '/database/migrations/2017_09_01_105033_create_task_files_table.php',
