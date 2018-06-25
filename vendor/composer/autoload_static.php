@@ -66,6 +66,7 @@ class ComposerStaticInitef64a7a0aa9301c2ba0c88bb34a204f2
             'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'StreamLab\\StreamLabProvider\\' => 28,
         ),
         'R' => 
         array (
@@ -227,6 +228,10 @@ class ComposerStaticInitef64a7a0aa9301c2ba0c88bb34a204f2
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'StreamLab\\StreamLabProvider\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/5dmatweb/streamlab/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -396,6 +401,7 @@ class ComposerStaticInitef64a7a0aa9301c2ba0c88bb34a204f2
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Middleware\\jwtCustomAuth' => __DIR__ . '/../..' . '/app/Http/Middleware/jwtCustomAuth.php',
         'App\\Http\\Requests\\API\\ApiTaskRequest' => __DIR__ . '/../..' . '/app/Http/Requests/API/ApiTaskRequest.php',
+        'App\\Notifications\\TaskNewNotification' => __DIR__ . '/../..' . '/app/Notifications/TaskNewNotification.php',
         'App\\Project' => __DIR__ . '/../..' . '/app/Project.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
@@ -3152,6 +3158,10 @@ class ComposerStaticInitef64a7a0aa9301c2ba0c88bb34a204f2
         'SebastianBergmann\\ResourceOperations\\ResourceOperations' => __DIR__ . '/..' . '/sebastian/resource-operations/src/ResourceOperations.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'SessionUpdateTimestampHandlerInterface' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/SessionUpdateTimestampHandlerInterface.php',
+        'StreamLab\\StreamLabProvider\\Curl' => __DIR__ . '/..' . '/5dmatweb/streamlab/src/Curl.php',
+        'StreamLab\\StreamLabProvider\\Facades\\StreamLabFacades' => __DIR__ . '/..' . '/5dmatweb/streamlab/src/Facades/StreamLabFacades.php',
+        'StreamLab\\StreamLabProvider\\StreamLab' => __DIR__ . '/..' . '/5dmatweb/streamlab/src/StreamLab.php',
+        'StreamLab\\StreamLabProvider\\StreamLabServiceProvider' => __DIR__ . '/..' . '/5dmatweb/streamlab/src/StreamLabServiceProvider.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\CommandLoader\\CommandLoaderInterface' => __DIR__ . '/..' . '/symfony/console/CommandLoader/CommandLoaderInterface.php',
         'Symfony\\Component\\Console\\CommandLoader\\ContainerCommandLoader' => __DIR__ . '/..' . '/symfony/console/CommandLoader/ContainerCommandLoader.php',

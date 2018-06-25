@@ -58,6 +58,8 @@ class ProjectApiController extends AppBaseController
 
        $project = Project::create([
                 'project_name' => $request->project_name,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
              
             ]);
 
@@ -71,8 +73,10 @@ class ProjectApiController extends AppBaseController
     public function search_projects(Request $request)
     {
         $project_name = $request['project_name'];
-        $projects    = Project::where(function($q) use($project_name) {
-          $q->orWhere('project_name', 'LIKE' , '%'.$project_name.'%');
+        $start_date = $request['start_date'];
+        $end_date = $request['end_date'];
+        $projects    = Project::where(function($q) use($project_name,$start_date,$end_date) {
+          $q->orWhere('project_name', 'LIKE' , '%'.$project_name.'%')->orWhere('start_date', 'LIKE' , '%'.$start_date.'%')->orWhere('end_date', 'LIKE' , '%'.$end_date.'%');
         })->paginate($this->default_paginate_number);
         
         return $this->sendResponse(compact('projects','keyword'));

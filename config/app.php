@@ -166,7 +166,7 @@ return [
         Barryvdh\Cors\ServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         InfyOm\Generator\InfyOmGeneratorServiceProvider::class,
-
+        StreamLab\StreamLabProvider\StreamLabServiceProvider::class,
       
 
 

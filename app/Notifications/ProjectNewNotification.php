@@ -6,8 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use App\Task;
-class TaskNewNotification extends Notification
+use App\Project;
+class ProjectNewNotification extends Notification
 {
     use Queueable;
 
@@ -17,10 +17,10 @@ class TaskNewNotification extends Notification
      * @return void
      */
 
-    protected  $task;
-    public function __construct(Task $task)
+    protected $project;
+    public function __construct(Project $project)
     {
-        $this->task = $task;
+        $this->project = $project;
     }
 
     /**
@@ -43,7 +43,7 @@ class TaskNewNotification extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'data' => 'We Have New Task ' .$this->task->task_title ." <br> Added By " . auth()->user()->name ." <br> Added At " . $this->task->created_at 
+            'data' => 'We Have New Project ' .$this->project->project_name ." <br> Added By " . auth()->user()->name ." <br> Added At " . $this->project->created_at 
         ];
     }
 
@@ -55,6 +55,8 @@ class TaskNewNotification extends Notification
      */
     public function toArray($notifiable)
     {
-         
+        return [
+            //
+        ];
     }
 }

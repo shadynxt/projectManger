@@ -15,6 +15,8 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
         <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
         <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
@@ -88,6 +90,26 @@
                                     </li>
                                 </ul>
                             </li>
+
+                             <li class="dropdown">
+                                <a href="#" class="dropdown-toggle notificaiton"  data-toggle="dropdown" role="button" aria-expanded="false">
+                                     <span class="glyphicon glyphicon-globe"></span>
+                                     notification
+
+                                    <span id="count">{{ count(auth()->user()->unreadNotifications) }}</span>
+                                     <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu" id="showNofication">
+                                    @foreach(auth()->user()->notifications as $note)
+                                        <li>
+                                            <a href="" class="{{ $note->read_at == null ? 'unread' : '' }}">
+                                                    {!! $note->data['data'] !!}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+</li>
                         @endif
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -142,6 +164,34 @@
 <script src="{{asset('js/toastr.min.js') }}"></script>
 
 <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
+<script src="/StreamLab/StreamLab.js"></script>
+<script>
+        var message, ShowDiv = $('#showNofication'), count = $('#count'), c;
+        var slh = new StreamLabHtml();
+        var sls = new StreamLabSocket({
+            appId:"{{ config('stream_lab.app_id') }}",
+            channelName:"test",
+            event:"*"
+        });
+        sls.socket.onmessage = function(res){
+            slh.setData(res);
+            if(slh.getSource() === 'messages'){
+                c = parseInt(count.html());
+                count.html(c+1);
+                message  = slh.getMessage();
+                ShowDiv.prepend('<li><a href="" class="unread">'+message+'</a></li>');
+            }
+        }
+        $('.notificaiton').on('click' , function(){
+            setTimeout( function(){
+                count.html(0);
+                $('.unread').each(function(){
+                    $(this).removeClass('unread');
+                });
+            }, 5000);
+            $.get('MarkAllSeen' , function(){});
+        });
+    </script>
 
 <script>
 

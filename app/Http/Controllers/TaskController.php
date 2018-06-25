@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 use Session;
 use Illuminate\Http\Request;
 
+use App\Notifications\TaskNewNotification;
 // import our models
 use App\Project;
 use App\Task;
 use App\TaskFiles;
 use App\User; 
+use Illuminate\Support\Facades\Notification;
+use StreamLab\StreamLabProvider\Facades\StreamLabFacades;
 
 use Illuminate\Support\Facades\Input; 
 
@@ -19,9 +22,15 @@ class TaskController extends Controller
 ===============================================*/
     public function index()
     {
-
         $users =  User::all() ; 
-        $tasks  = Task::orderBy('created_at', 'desc')->paginate(10) ;  // Paginate Tasks 
+        $user = auth()->user();
+        if($user->admin == 2){
+           $tasks  = Task::orderBy('created_at', 'desc')->paginate(10); 
+        }else{
+            $tasks = Task::orderBy('created_at', 'desc')->where("user_id",$user->id)->paginate(10);
+        }
+        
+         // Paginate Tasks 
 
         return view('task.tasks')->with('tasks', $tasks) 
                                  ->with('users', $users ) ;
@@ -73,6 +82,25 @@ class TaskController extends Controller
 
 
         $task_view = Task::find($id) ;
+        /*
+        $user =auth()->user();
+        //dd($user);
+        if($user->role == 1){
+            $task_view = Task::where('id','=',$id)->Where('user_id',$user->id)->first();
+            if(!empty($task_view)){
+                $task_view = Task::where('id',$id)->first();
+                return view('task.view')->with('task', $task_view);
+            }
+            else
+            {
+                return redirect('/')->with('error','CSRF SUCKS! , You are not authorized to view that task');
+            }
+        }
+        else{
+            $task_view = Task::where('id',$id)->first();
+            return view('task.view')->with('task_view', $task_view);
+        }*/
+
 
         // Get task created and due dates
         $from = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $task_view->created_at);
@@ -98,6 +126,7 @@ class TaskController extends Controller
         // Check for overdue tasks
         $is_overdue = ($current_date->gt($to) ) ? true : false ;
 
+        
         // $task_view->project->project_name   will output the project name for this specific task
         // to populate the right sidebar with related tasks
         $projects = Project::all() ;
@@ -156,6 +185,7 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         // dd($request->all() ) ;
+        
         $tasks_count = Task::count() ;
         
         if ( $tasks_count < 200  ) { 
@@ -188,6 +218,13 @@ class TaskController extends Controller
                 'actual_end_date' => $request->actual_end_date,
                 'duedate'    => $request->duedate
             ]);
+
+            if($task){
+            $user = User::all();
+            Notification::send($user , new TaskNewNotification($task));
+            $data = 'We Have New Task ' .$task->task_title ." <br> Added By " . auth()->user()->name." <br> Added At " . $task->created_at;
+            StreamLabFacades::pushMessage('test' , 'AddTask' , $data);
+        }
 
             // Then save files using the newly created ID above
             if( $request->hasFile('photos') ) {

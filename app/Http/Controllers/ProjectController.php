@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Session;
 use Illuminate\Http\Request;
+use App\Notifications\ProjectNewNotification;
 use App\Project;
 use App\Task;
-
+use App\User;
+use Illuminate\Support\Facades\Notification;
+use StreamLab\StreamLabProvider\Facades\StreamLabFacades;
+use Illuminate\Support\Facades\Input; 
 
 class ProjectController extends Controller
 {
@@ -33,6 +37,8 @@ class ProjectController extends Controller
         return view('project.create') ;
     }
 
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -54,7 +60,13 @@ class ProjectController extends Controller
             $project_new->project_name = $request->project;
             $project_new->start_date = $request->start_date;
             $project_new->end_date = $request->end_date;
-            $project_new->save() ;
+            if( $project_new->save() ){
+
+                $user = User::all();
+                 Notification::send($user , new ProjectNewNotification($project_new));
+                $data = 'We Have New Project ' .$project_new->project_name ." <br> Added By " . auth()->user()->name." <br> Added At " . $project_new->created_at;
+                StreamLabFacades::pushMessage('test' , 'AddProject' , $data);
+            }
             Session::flash('success', 'Project Created') ;
             return redirect()->route('project.show') ;
         }
@@ -63,6 +75,57 @@ class ProjectController extends Controller
             Session::flash('info', 'Please delete some projects, Demo max: 1000') ;
             return redirect()->route('project.show') ;          
         }
+    }
+
+
+
+
+     public function view($id)  {
+       
+
+
+
+        $project_view = Project::find($id) ;
+
+        // Get task created and due dates
+       // $from = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $project_view->created_at);
+        
+
+         $new_from   = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $project_view->start_date);
+         
+         $new_to   = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $project_view->end_date);
+        
+        $current_date = \Carbon\Carbon::now();
+ 
+        // Format dates for Humans
+        //$formatted_from = $from->toRfc850String();  
+        
+        $formatted_new_from = $new_from->toRfc850String();
+        
+        $formatted_new_to = $new_to->toRfc850String();
+        
+        // Get Difference between current_date and duedate = days left to complete task
+        // $diff_in_days = $from->diffInDays($to);
+        $diff_in_days = $current_date->diffInDays($to);
+
+        // Check for overdue tasks
+        $is_overdue = ($current_date->gt($to) ) ? true : false ;
+
+        // $task_view->project->project_name   will output the project name for this specific task
+        // to populate the right sidebar with related tasks
+        $task_view = Task::all() ;
+        return view('project.view')
+            ->with('project_view', $project_view) 
+            
+            
+            ->with('diff_in_days', $diff_in_days )
+            ->with('is_overdue', $is_overdue) 
+            ->with('task_view', $task_view ) 
+            
+            ->with('formatted_new_from', $formatted_new_from )
+            
+            ->with('formatted_new_to', $formatted_new_to );
+            
     }
 
     /**
@@ -127,7 +190,7 @@ class ProjectController extends Controller
        
         $value = Input::get('project_search');
         // Search Inside the Contents of a task
-        $projects = Project::where('task_title', 'LIKE', '%' . $value . '%')->limit(25)->get();
+        $projects = Project::where('project_name', 'LIKE', '%' . $value . '%')->limit(25)->get();
         return view('project.search')->with('value', $value)
                                   ->with('projects', $projects) ;
     }

@@ -23,6 +23,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 	// ===================== PROJECTS ======================
 	Route::get('/projects', 'ProjectController@index')->name('project.show') ;
 
+	Route::get('/projects/view/{id}','ProjectController@view')->name('project.view') ;
+
 	Route::get('/projects/create', 'ProjectController@create')->name('project.create') ;
 
 	Route::get('/projects/edit/{id}', 'ProjectController@edit')->name('project.edit') ;
@@ -34,7 +36,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 	// Store the new project from the form posted with the view Above
 	Route::post('/projects/store', 'ProjectController@store')->name('project.store');
 
-	Route::get('projects/search', 'ProjectController@searchProjects')->name('project.search') ;
+	Route::get('projects/search', 'ProjectController@searchProject')->name('project.search') ;
 
 
 	// ====================  TASKS =======================

@@ -27,7 +27,7 @@
            {{ $project->end_date }}
         </td>
         <td>
-            <!-- <a href="{{ route('task.edit', ['id' => $task->id]) }}" class="btn btn-primary"> edit </a> -->
+            
             <a href="{{ route('project.view', ['id' => $project->id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
             <a href="{{ route('project.delete', ['id' => $project->id]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
 
