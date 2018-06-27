@@ -2,13 +2,6 @@
 
 A simple task manager app built with Laravel 5.4.33
   
-### Demo
-[Task Management Demo](http://taskmanager.juancadima.com/)
-
-
-### Demo login info:
-user: demo@test.com <br/>
-pass: demo2017
 
 ### How to install
 1) Simply [download](https://github.com/shadynxt/projectManger/archive/master.zip) or clone the repo:
