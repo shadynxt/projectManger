@@ -11,13 +11,13 @@ user: demo@test.com <br/>
 pass: demo2017
 
 ### How to install
-1) Simply [download](https://github.com/jcadima/Laravel-Project-mgmt/archive/master.zip) or clone the repo:
+1) Simply [download](https://github.com/shadynxt/projectManger/archive/master.zip) or clone the repo:
 ```
-git clone https://github.com/jcadima/Laravel-Project-mgmt.git
+git clone https://github.com/shadynxt/projectManger.git
 ```
 
 2a) Import database and modify your .env file
-[Task Management DB](https://github.com/jcadima/Laravel-Project-mgmt/blob/master/project_mgmt.sql)
+[Task Management DB](https://github.com/shadynxt/projectManger/blob/master/project_mgmt.sql)
 
 **NOTE**: If using MariaDB you might see an error about "key too long", to fix this open:
 ```
@@ -66,7 +66,7 @@ The project comes with a UsersTableSedder.php class with the following:
         App\User::create([
             'name' => 'Demo User',
             'email' => 'demo@test.com',
-            'password' => bcrypt('demo2017') 
+            'password' => bcrypt('demo2018') 
         ]);
 ```
 
@@ -271,9 +271,9 @@ http://laraproject.test
 * [X] Clean filenames before uploading: blank spaces, dots
 * [X] Add FileManager package for file uploads
 * [X] Add custom class options for uploaded images
-* [ ] Add autocomplete search
+* [X] Add autocomplete search
 * [ ] Nested Comment System
-* [ ] Add User token confirmation Emails
+* [X] Add User token confirmation Emails
 
 ### Screenshots
 
