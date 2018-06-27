@@ -1,7 +1,6 @@
 # Laravel Project Task Manager
 
 A simple task manager app built with Laravel 5.4.33
-  
 
 ### How to install
 1) Simply [download](https://github.com/shadynxt/projectManger/archive/master.zip) or clone the repo:
